@@ -4,13 +4,18 @@ import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { useChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { AssistantCloud } from "assistant-cloud";
 import { Thread } from "@assistant-ui/react-ui";
+import { useMemo } from "react";
 
-const cloud = new AssistantCloud({
-  baseUrl: process.env.NEXT_PUBLIC_ASSISTANT_BASE_URL!,
-  anonymous: true,
-});
+export interface ChatInterfaceProps {
+  cloudBaseUrl: string;
+}
 
-export function ChatInterface() {
+export function ChatInterface({ cloudBaseUrl }: ChatInterfaceProps) {
+  const cloud = useMemo(
+    () => new AssistantCloud({ baseUrl: cloudBaseUrl, anonymous: true }),
+    [cloudBaseUrl]
+  );
+
   const runtime = useChatRuntime({ cloud });
 
   return (
