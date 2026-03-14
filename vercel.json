@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "buildCommand": "npm run build && cd playground && npm run build",
+  "installCommand": "npm install && cd playground && npm install",
+  "outputDirectory": "playground/.next"
+}
