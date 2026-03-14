@@ -6,3 +6,4 @@ dist/
 # Next.js playground
 playground/.next/
 playground/node_modules/
+.vercel

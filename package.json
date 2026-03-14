@@ -6,36 +6,33 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
     "./server": {
+      "types": "./dist/server.d.ts",
       "import": "./dist/server.mjs",
-      "require": "./dist/server.js",
-      "types": "./dist/server.d.ts"
+      "require": "./dist/server.js"
     },
     "./index.css": "./dist/index.css"
   },
   "scripts": {
-    "build": "tsup && npx @tailwindcss/cli -i ./src/styles.css -o ./dist/index.css",
+    "prepare": "npm run build",
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist && npx @tailwindcss/cli -i ./src/styles.css -o ./dist/index.css",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
-    "next": "^14.0.0 || ^15.0.0",
+    "next": "^14.0.0 || ^15.0.0 || ^16.0.0",
     "react": "^18.2.0 || ^19.0.0",
-    "react-dom": "^18.2.0 || ^19.0.0",
-    "tailwindcss": "^3.0.0"
+    "react-dom": "^18.2.0 || ^19.0.0"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.1.0",
-    "@ai-sdk/react": "^1.1.0",
-    "@assistant-ui/react": "^0.12.0",
-    "@assistant-ui/react-ai-sdk": "^1.3.0",
-    "@assistant-ui/react-markdown": "^0.12.5",
-    "@assistant-ui/react-syntax-highlighter": "^0.12.0",
+    "@assistant-ui/react": "^0.12.15",
+    "@assistant-ui/react-data-stream": "^0.12.0",
     "@assistant-ui/react-ui": "^0.2.1",
     "ai": "^4.0.0",
     "class-variance-authority": "^0.7.0",

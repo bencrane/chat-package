@@ -17,7 +17,7 @@ export interface ChatHandlerOptions {
 }
 
 export function createAnthropicChatHandler(options: ChatHandlerOptions = {}) {
-  const modelName = options.model || 'claude-3-5-sonnet-latest';
+  const modelName = options.model || 'claude-sonnet-4-20250514';
   const tools = options.tools || {};
 
   return async function POST(req: Request) {
