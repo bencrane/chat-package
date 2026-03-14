@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env*
+.DS_Store
+
+# Next.js playground
+playground/.next/
+playground/node_modules/
