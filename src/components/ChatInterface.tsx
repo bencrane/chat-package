@@ -3,25 +3,40 @@
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { useChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { AssistantCloud } from "assistant-cloud";
-import { Thread } from "@assistant-ui/react-ui";
+import { Thread, ThreadList } from "@assistant-ui/react-ui";
 import { useMemo } from "react";
 
 export interface ChatInterfaceProps {
-  cloudBaseUrl: string;
+  /** assistant-ui Cloud API base URL for persistent threads. Optional. */
+  cloudBaseUrl?: string;
 }
 
 export function ChatInterface({ cloudBaseUrl }: ChatInterfaceProps) {
   const cloud = useMemo(
-    () => new AssistantCloud({ baseUrl: cloudBaseUrl, anonymous: true }),
+    () =>
+      cloudBaseUrl
+        ? new AssistantCloud({ baseUrl: cloudBaseUrl, anonymous: true })
+        : undefined,
     [cloudBaseUrl]
   );
 
   const runtime = useChatRuntime({ cloud });
 
   return (
-    <div className="aui-root dark flex flex-col h-full w-full bg-background text-foreground">
+    <div className="aui-root dark flex h-full w-full bg-background text-foreground">
       <AssistantRuntimeProvider runtime={runtime}>
-        <Thread />
+        {cloud ? (
+          <>
+            <div className="w-[220px] shrink-0 border-r border-border">
+              <ThreadList />
+            </div>
+            <div className="flex-1 min-w-0">
+              <Thread />
+            </div>
+          </>
+        ) : (
+          <Thread />
+        )}
       </AssistantRuntimeProvider>
     </div>
   );
